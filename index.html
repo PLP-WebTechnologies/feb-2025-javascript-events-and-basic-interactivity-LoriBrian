@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Event Handling & Interactive Elements</title>
+  <style>
+    /* Add your CSS styles here (optional) */
+    .animate {
+      transform: scale(1.2);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Event Handling -->
+  <h2>Event Handling</h2>
+  
+  <button id="clickBtn">Click Me</button>
+  <script>
+    document.getElementById("clickBtn").addEventListener("click", function() {
+      alert("Button clicked!");
+    });
+  </script>
+
+  <div id="hoverDiv" style="width: 100px; height: 100px; background-color: #3498db;"></div>
+  <script>
+    document.getElementById("hoverDiv").addEventListener("mouseenter", function() {
+      this.style.backgroundColor = "#e74c3c";
+    });
+    document.getElementById("hoverDiv").addEventListener("mouseleave", function() {
+      this.style.backgroundColor = "#3498db";
+    });
+  </script>
+
+  <input type="text" id="textInput" placeholder="Type something...">
+  <script>
+    document.getElementById("textInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        alert("You pressed Enter!");
+      }
+    });
+  </script>
+
+  <div id="doubleClickDiv" style="width: 100px; height: 100px; background-color: #2ecc71;"></div>
+  <script>
+    document.getElementById("doubleClickDiv").addEventListener("dblclick", function() {
+      alert("You double-clicked me!");
+    });
+  </script>
+
+  <!-- 2. Interactive Elements -->
+  <h2>Interactive Elements</h2>
+
+  <button id="changeBtn">Change Color</button>
+  <script>
+    document.getElementById("changeBtn").addEventListener("click", function() {
+      this.style.backgroundColor = "#9b59b6";
+      this.textContent = "Color Changed!";
+    });
+  </script>
+
+  <img id="slideshow" src="image1.jpg" alt="Slideshow Image" width="300">
+  <button id="nextBtn">Next Image</button>
+  <script>
+    let images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+    let currentImage = 0;
+    document.getElementById("nextBtn").addEventListener("click", function() {
+      currentImage = (currentImage + 1) % images.length;
+      document.getElementById("slideshow").src = images[currentImage];
+    });
+  </script>
+
+  <button class="tab" id="tab1">Tab 1</button>
+  <button class="tab" id="tab2">Tab 2</button>
+  <div id="content1">Content for Tab 1</div>
+  <div id="content2">Content for Tab 2</div>
+
+  <script>
+    document.getElementById("tab1").addEventListener("click", function() {
+      document.getElementById("content1").style.display = "block";
+      document.getElementById("content2").style.display = "none";
+    });
+    document.getElementById("tab2").addEventListener("click", function() {
+      document.getElementById("content2").style.display = "block";
+      document.getElementById("content1").style.display = "none";
+    });
+  </script>
+
+  <button id="animateBtn">Click to Animate</button>
+  <script>
+    document.getElementById("animateBtn").addEventListener("click", function() {
+      this.classList.add("animate");
+    });
+  </script>
+
+  <!-- 3. Form Validation -->
+  <h2>Form Validation</h2>
+
+  <form id="form">
+    <input type="text" id="username" required placeholder="Enter Username">
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById("form").addEventListener("submit", function(event) {
+      let username = document.getElementById("username").value;
+      if (!username) {
+        alert("Username is required!");
+        event.preventDefault();  // Prevent form submission
+      }
+    });
+  </script>
+
+  <form id="emailForm">
+    <input type="email" id="email" required placeholder="Enter Email">
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById("emailForm").addEventListener("submit", function(event) {
+      let email = document.getElementById("email").value;
+      let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!regex.test(email)) {
+        alert("Please enter a valid email!");
+        event.preventDefault();
+      }
+    });
+  </script>
+
+  <form id="passwordForm">
+    <input type="password" id="password" required placeholder="Enter Password">
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById("passwordForm").addEventListener("submit", function(event) {
+      let password = document.getElementById("password").value;
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters!");
+        event.preventDefault();
+      }
+    });
+  </script>
+
+  <input type="text" id="username" placeholder="Username">
+  <div id="usernameFeedback"></div>
+  <script>
+    document.getElementById("username").addEventListener("input", function() {
+      let feedback = document.getElementById("usernameFeedback");
+      if (this.value.length < 5) {
+        feedback.textContent = "Username must be at least 5 characters.";
+        feedback.style.color = "red";
+      } else {
+        feedback.textContent = "Good to go!";
+        feedback.style.color = "green";
+      }
+    });
+  </script>
+
+</body>
+</html>
